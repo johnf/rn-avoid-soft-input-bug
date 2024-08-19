@@ -26,13 +26,16 @@ export const useAvoidSoftInput = () => {
 };
 
 
-const mainStyle = {
-  flex: 1,
+const styles = {
+  main: { flex: 1 },
+  text: { fontSize: 24 },
 };
+
 const HomeScreen = ({ navigation }) => {
+  // useAvoidSoftInput();
   return (
-  <View style={mainStyle}>
-    <Text style={{ fontSize: 24 }}>Home Screen</Text>
+  <View style={styles.main}>
+    <Text style={styles.text}>Home Screen</Text>
     <Button title="Go to First" onPress={() => navigation.navigate('First')} />
   </View>
 );
@@ -41,8 +44,8 @@ const HomeScreen = ({ navigation }) => {
 const FirstScreen = ({ navigation }) => {
   useAvoidSoftInput();
   return (
-  <View style={mainStyle}>
-    <Text style={{ fontSize: 24 }}>First Screen</Text>
+  <View style={styles.main}>
+    <Text style={styles.text}>First Screen</Text>
     <Button title="Go to Second" onPress={() => navigation.navigate('Second')} />
   </View>
 );
@@ -51,48 +54,33 @@ const FirstScreen = ({ navigation }) => {
 const SecondScreen = ({ navigation }) => {
   useAvoidSoftInput();
   return (
-  <View style={mainStyle}>
-    <Text style={{ fontSize: 24 }}>Second Screen</Text>
+  <View style={styles.main}>
+    <Text style={styles.text}>Second Screen</Text>
     <Button title="Go to Third" onPress={() => navigation.navigate('Third')} />
   </View>
 );
 };
 
 const ThirdScreen = () => {
+  useAvoidSoftInput();
   return (
-  <View style={mainStyle}>
-    <Text style={{ fontSize: 24 }}>Third Screen</Text>
+  <View style={styles.main}>
+    <Text style={styles.text}>Third Screen</Text>
   </View>
 );
 };
 
-
-const AppStack = createStackNavigator();
-
-const AppNavigator = () => (
-      <AppStack.Navigator screenOptions={{ headerShown: false }}>
-        <AppStack.Screen name="Home" component={HomeScreen} />
-        <AppStack.Screen name="First" component={FirstScreen} />
-        <AppStack.Screen name="Second" component={SecondScreen} />
-        <AppStack.Screen name="Third" component={ThirdScreen} />
-      </AppStack.Navigator>
-);
-
-const RootStack = createStackNavigator();
+const Stack = createStackNavigator();
 
 const RootNavigator = () => (
-  <View style={{ flex: 1 }}>
+  <View style={styles.main}>
     <NavigationContainer>
-      <RootStack.Navigator
-        // key={authUser ? 'authenticated' : 'unauthenticated'}
-        screenOptions={{ headerShown: false }}
-      >
-        {/* {authUser ? ( */}
-          <AppStack.Screen name="App" component={AppNavigator} />
-        {/* ) : ( */}
-          {/* <Stack.Screen name="Auth" component={AuthNavigator} /> */}
-        {/* )} */}
-      </RootStack.Navigator>
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="First" component={FirstScreen} />
+        <Stack.Screen name="Second" component={SecondScreen} />
+        <Stack.Screen name="Third" component={ThirdScreen} />
+      </Stack.Navigator>
     </NavigationContainer>
   </View>
 );
